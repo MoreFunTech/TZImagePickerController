@@ -296,7 +296,7 @@
 //喜第需求添加【返回预览视频选择封面】
 @property (nonatomic, copy) void (^didFinishPickingAndQualityAndGetCoverVideoHandle)(UIImage *coverImage,PHAsset *asset,BOOL isHeightQuality,NSString *errorMsg);
 // 选择视频后马上回调给外部的控制器进行裁剪处理
-@property (nonatomic, copy) void (^didFinishPickingAndCustomIsSelectedCropHandle)(TZAssetModel *model);
+@property (nonatomic, copy) void (^didFinishPickingAndCustomIsSelectedCropHandle)(TZAssetModel *model, UIViewController *photoVC, TZImagePickerController *pickerVC);
 @property (nonatomic, weak) id<TZImagePickerControllerDelegate> pickerDelegate;
 
 @end

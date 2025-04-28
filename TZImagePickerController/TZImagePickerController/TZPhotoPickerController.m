@@ -887,7 +887,7 @@ static CGFloat itemMargin = 5;
                 [self.navigationController pushViewController:videoPlayerVc animated:YES];
             } else {
                 if (tzImagePickerVc.customIsSelectedCrop) {
-                    if (tzImagePickerVc.didFinishPickingAndCustomIsSelectedCropHandle) tzImagePickerVc.didFinishPickingAndCustomIsSelectedCropHandle(model);
+                    if (tzImagePickerVc.didFinishPickingAndCustomIsSelectedCropHandle) tzImagePickerVc.didFinishPickingAndCustomIsSelectedCropHandle(model, self, tzImagePickerVc);
                 }else {
                     TZVideoPlayerController *videoPlayerVc = [[TZVideoPlayerController alloc] init];
                     videoPlayerVc.model = model;
