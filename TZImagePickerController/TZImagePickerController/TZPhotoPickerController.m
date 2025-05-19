@@ -1307,8 +1307,12 @@ static CGFloat itemMargin = 5;
             photoPreviewVc.models = _models;
             [self pushPhotoPrevireViewController:photoPreviewVc];
         } else if (tzImagePickerVc.selectedModels.count < 1) {
-            [tzImagePickerVc addSelectedModel:assetModel];
-            [self doneButtonClick];
+            if (tzImagePickerVc.customIsSelectedCrop) {
+                if (tzImagePickerVc.didFinishPickingAndCustomIsSelectedCropHandle) tzImagePickerVc.didFinishPickingAndCustomIsSelectedCropHandle(assetModel, self, tzImagePickerVc);
+            }else {
+                [tzImagePickerVc addSelectedModel:assetModel];
+                [self doneButtonClick];
+            }
         }
         return;
     }
