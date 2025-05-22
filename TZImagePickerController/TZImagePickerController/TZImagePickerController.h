@@ -54,8 +54,10 @@
 @property (nonatomic, assign) BOOL customVideoPreview;
 //是否使用XD 特定的相册分类功能，不返回页面选择
 @property (nonatomic, assign) BOOL customShowAlbumCategory;
-// 是否选择之后进行裁剪
+// 是否选择之后进行裁剪 视频
 @property (nonatomic, assign) BOOL customIsSelectedCrop;
+// 图片是否选择之后马上进行裁剪, 单选模式
+@property (nonatomic, assign) BOOL customIsSelectedCropImage;
 #pragma mark -
 /// Default is 9 / 默认最大可选9张图片
 @property (nonatomic, assign) NSInteger maxImagesCount;

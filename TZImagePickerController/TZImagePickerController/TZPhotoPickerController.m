@@ -905,10 +905,15 @@ static CGFloat itemMargin = 5;
             [self.navigationController pushViewController:gifPreviewVc animated:YES];
         }
     } else {
-        TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
-        photoPreviewVc.currentIndex = index;
-        photoPreviewVc.models = _models;
-        [self pushPhotoPrevireViewController:photoPreviewVc];
+        if (tzImagePickerVc.maxImagesCount == 1 && tzImagePickerVc.customIsSelectedCropImage) {
+            [tzImagePickerVc addSelectedModel:model];
+            [self doneButtonClick];
+        }else {
+            TZPhotoPreviewController *photoPreviewVc = [[TZPhotoPreviewController alloc] init];
+            photoPreviewVc.currentIndex = index;
+            photoPreviewVc.models = _models;
+            [self pushPhotoPrevireViewController:photoPreviewVc];
+        }
     }
 }
 
