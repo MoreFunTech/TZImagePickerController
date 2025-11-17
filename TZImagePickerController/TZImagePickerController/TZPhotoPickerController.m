@@ -21,6 +21,8 @@
 #import "TZAuthLimitedFooterTipView.h"
 #import <PhotosUI/PhotosUI.h>
 #import "TZXDAlbumCategoryView.h"
+#import <QuartzCore/QuartzCore.h>
+
 @interface TZPhotoPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, PHPhotoLibraryChangeObserver,UIGestureRecognizerDelegate> {
     NSMutableArray *_models;
     
@@ -52,6 +54,7 @@
 @property (nonatomic, assign) BOOL isSavingMedia;
 @property (nonatomic, assign) BOOL isFetchingMedia;
 @property (nonatomic, strong) TZXDAlbumCategoryView * albumCategoryView;
+@property (nonatomic, assign) CFAbsoluteTime lastCollectionViewLoadTime;
 @end
 
 static CGSize AssetGridThumbnailSize;
@@ -491,10 +494,20 @@ static CGFloat itemMargin = 5;
     
     [TZImageManager manager].columnNumber = [TZImageManager manager].columnNumber;
     [TZImageManager manager].photoWidth = tzImagePickerVc.photoWidth;
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
+    CFAbsoluteTime curTime = CFAbsoluteTimeGetCurrent();
+    if (self.lastCollectionViewLoadTime == 0) {
+        [self.collectionView reloadData];
+        self.lastCollectionViewLoadTime = curTime;
+    }else {
+        if (curTime - self.lastCollectionViewLoadTime >= 0.5) {
+            [self.collectionView reloadData];
+            self.lastCollectionViewLoadTime = curTime;
+        }
+    }
     
     if (tzImagePickerVc.photoPickerPageDidLayoutSubviewsBlock) {
-        tzImagePickerVc.photoPickerPageDidLayoutSubviewsBlock(_collectionView, _bottomToolBar, _previewButton, _originalPhotoButton, _originalPhotoLabel, _doneButton, _numberImageView, _numberLabel, _divideLine);
+        tzImagePickerVc.photoPickerPageDidLayoutSubviewsBlock(_collectionView, _bottomToolBar, _previewButton, _originalPhotoButton, _originalPhotoLabel, _doneButton, _numberImageView, _numberLabel, _divideLine, _albumTitleView);
     }
     
     //XD相册分类需求
