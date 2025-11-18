@@ -235,6 +235,8 @@
 @property (nonatomic, copy) void (^photoPickerPageDidRefreshStateBlock)(UICollectionView *collectionView, UIView *bottomToolBar, UIButton *previewButton, UIButton *originalPhotoButton, UILabel *originalPhotoLabel, UIButton *doneButton, UIImageView *numberImageView, UILabel *numberLabel, UIView *divideLine);
 
 @property (nonatomic, copy) void (^photoPreviewPageDidRefreshStateBlock)(UICollectionView *collectionView, UIView *naviBar, UIButton *backButton, UIButton *selectButton, UILabel *indexLabel, UIView *toolBar, UIButton *originalPhotoButton, UILabel *originalPhotoLabel, UIButton *doneButton, UIImageView *numberImageView, UILabel *numberLabel);
+/// 导航栏TitleView（切换相册类型）
+@property (nonatomic, copy) void (^photoPickerPageRefreshAlbumTitleViewLayoutBlock)(UIButton * albumTitleView);
 
 #pragma mark -
 - (UIAlertController *)showAlertWithTitle:(NSString *)title;

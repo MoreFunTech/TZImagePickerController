@@ -509,7 +509,9 @@ static CGFloat itemMargin = 5;
     if (tzImagePickerVc.photoPickerPageDidLayoutSubviewsBlock) {
         tzImagePickerVc.photoPickerPageDidLayoutSubviewsBlock(_collectionView, _bottomToolBar, _previewButton, _originalPhotoButton, _originalPhotoLabel, _doneButton, _numberImageView, _numberLabel, _divideLine, _albumTitleView);
     }
-    
+    if (tzImagePickerVc.photoPickerPageRefreshAlbumTitleViewLayoutBlock) {
+        tzImagePickerVc.photoPickerPageRefreshAlbumTitleViewLayoutBlock(_albumTitleView);
+    }
     //XD相册分类需求
     if (tzImagePickerVc.customShowAlbumCategory) {
         _albumCategoryBar.frame = CGRectMake(0, top, self.view.tz_width, self.view.tz_height - top);
@@ -566,6 +568,11 @@ static CGFloat itemMargin = 5;
     [self.albumTitleView setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 10)];
     
     TZImagePickerController *tzImagePickerVc = (TZImagePickerController *)self.navigationController;
+    
+    if (tzImagePickerVc.photoPickerPageRefreshAlbumTitleViewLayoutBlock) {
+        tzImagePickerVc.photoPickerPageRefreshAlbumTitleViewLayoutBlock(_albumTitleView);
+    }
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
         if (!tzImagePickerVc.sortAscendingByModificationDate && self->_isFirstAppear && self->_model.isCameraRoll) {
